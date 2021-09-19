@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 
     const { books, hasMore, loading, error } = useBookSearch(query, pageNumber);
 
-    const observer = useRef();
+    const observer = useRef<IntersectionObserver>();
     const lastBookElementRef = useCallback(
         (node) => {
             if (loading) return;
@@ -38,25 +38,25 @@ const Home: NextPage = () => {
             </Head>
 
             <div className="bg-dark-600">
-                <div className="w-5/6 m-auto bg-dark-500 min-h-screen py-10 px-36">
+                <div className="w-5/6 min-h-screen py-10 m-auto bg-dark-500 px-36">
                     <div className="flex justify-center">
                         <input
                             type="text"
                             placeholder="Search your book"
                             value={query}
                             onChange={handleSearch}
-                            className="bg-transparent border-b-2 border-dark-600 text-white w-5/6 outline-none"
+                            className="w-5/6 text-white bg-transparent border-b-2 outline-none border-dark-600"
                         />
                     </div>
 
-                    <div className="space-y-4 mt-12">
+                    <div className="mt-12 space-y-4">
                         {books.map((book, index) => {
                             if (books.length === index + 1) {
                                 return (
                                     <div
                                         ref={lastBookElementRef}
                                         key={book}
-                                        className="bg-dark-600 text-white rounded-md px-7 py-2 text-lg"
+                                        className="py-2 text-lg text-white rounded-md bg-dark-600 px-7"
                                     >
                                         {book}
                                     </div>
@@ -65,16 +65,16 @@ const Home: NextPage = () => {
                             return (
                                 <div
                                     key={book}
-                                    className="bg-dark-600 text-white rounded-md px-7 py-2 text-lg"
+                                    className="py-2 text-lg text-white rounded-md bg-dark-600 px-7"
                                 >
                                     {book}
                                 </div>
                             );
                         })}
 
-                        {loading && <div className="px-7 text-white text-xl">Loading...</div>}
+                        {loading && <div className="text-xl text-white px-7">Loading...</div>}
 
-                        {error && <div className="px-7 text-white text-xl">Error</div>}
+                        {error && <div className="text-xl text-white px-7">Error</div>}
                     </div>
                 </div>
             </div>
