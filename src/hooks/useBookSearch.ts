@@ -25,7 +25,10 @@ export default function useBookSearch(query: string, pageNumber: number) {
         })
             .then((res) => {
                 setBooks((prevBooks) => [
-                    ...new Set([...prevBooks, ...res.data.docs.map((b) => b.title)]),
+                    ...new Set([
+                        ...prevBooks,
+                        ...res.data.docs.map((b: { title: string }) => b.title),
+                    ]),
                 ]);
                 setHasMore(res.data.docs.length > 0);
                 setLoading(false);
