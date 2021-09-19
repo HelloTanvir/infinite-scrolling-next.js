@@ -17,7 +17,7 @@ export default function useBookSearch(query: string, pageNumber: number) {
         let cancel: Canceler;
         axios({
             method: 'GET',
-            url: 'http://openlibrary.org/search.json',
+            url: 'https://openlibrary.org/search.json',
             params: { q: query, page: pageNumber },
             cancelToken: new axios.CancelToken((c) => {
                 cancel = c;
